@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block index %}
+
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static '' %}vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static '' %}what_i_learn/css/scrolling-nav.css" rel="stylesheet">
+
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  {% include 'temp_part/navbar.html' %}
+<br><br>
+
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>{{ what.title }}</h1>
+      <p class="lead">creatred at {{ what.created_at }} </p>
+        <p>by: {{ what.by_user }}</p>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-11 mx-auto">
+
+          <p>{{ what.content|safe }}</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <br>  <br>
+
+{% include 'temp_part/footer.html' %}
+</body>
+
+{% endblock %}

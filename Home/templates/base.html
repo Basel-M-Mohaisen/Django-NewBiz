@@ -1,0 +1,251 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block index %}
+
+<body>
+
+  <!--==========================
+  Header
+  ============================-->
+{% include 'temp_part/navbar.html' %}
+  <!-- #header -->
+
+  <!--==========================
+    Intro Section
+  ============================-->
+  <section id="intro" class="clearfix">
+    <div class="container">
+
+      <div class="intro-img">
+        <img src="{% static '' %}img/intro-img.svg" alt="" class="img-fluid" >
+      </div>
+
+      <div class="intro-info">
+        <h2>I nev er dream of<br><span>Success</span><br>i worked for it .</h2>
+        <div>
+
+     {% if user.is_anonymous %}
+          <a href="{% url 'register' %}" class="btn-get-started scrollto">Register</a>
+          <a href="{% url 'login' %}" class="btn-services scrollto">Sign IN</a>
+     {% else %}
+          <a href="{% url 'add_question' %}" class="btn-get-started scrollto mt-3">Add Questions</a>
+     {% endif %}
+
+        </div>
+      </div>
+
+    </div>
+  </section><!-- #intro -->
+
+  <main id="main">
+
+    <!--==========================
+      About Us Section
+    ============================-->
+    <section id="about">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>What will we learn</h3>
+          <p>Now define your goal and choose your favorite programming specialty .</p>
+        </header>
+
+{% for i in learn %}
+
+        <div class="row about-extra">
+          <div class="col-lg-6 wow fadeInUp">
+            <img src="{{ i.image.url }}" class="img-fluid" style="max-width: 500px;height: 450px" alt="">
+          </div>
+          <div class="col-lg-6 wow fadeInUp pt-5 pt-lg-0">
+            <h4>{{ i.title }}</h4>
+            <p>{{ i.purport|truncatechars_html:800|safe }}</p>
+             <a href="{% url 'what' i.slug %}" class="btn btn-outline-primary" role="button" aria-pressed="true">Start reading</a>
+
+          </div>
+        </div>
+     {% endfor %}
+
+      </div>
+    </section><!-- #about -->
+
+
+    <!--==========================
+      Services Section
+    ============================-->
+    <section id="services" class="section-bg">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>Articles</h3>
+          <p>Technical articles and high-quality explanations in the field of technology, programming, and all computer science.</p>
+        </header>
+
+        <div class="row">
+
+{% for a in article %}
+
+          <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+            <div class="box">
+              <div class="icon"><i class="ion-ios-paper-outline" style="color: #3fcdc7;"></i></div>
+              <h4 class="title"><a href="{% url 'Single' a.slug %}">{{ a.title }}</a></h4>
+              <p class="description">{{ a.content|slice:":150" }} ...</p>
+            </div>
+          </div>
+{% endfor %}
+
+
+
+
+        </div>
+
+      </div>
+    </section><!-- #services -->
+
+    <!--==========================
+      Why Us Section
+    ============================-->
+    <section id="why-us" class="wow fadeIn">
+      <div class="container">
+        <header class="section-header">
+          <h3>Statistics</h3>
+          <p>These are the latest statistics about our site in terms of.</p>
+        </header>
+
+        <div class="row counters mx-auto">
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">{{ user.count }}</span>
+            <p>User</p>
+          </div>
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">{{ article.count }}</span>
+            <p>Artical</p>
+          </div>
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">{{ question.count }}</span>
+            <p>Questions</p>
+          </div>
+          <div class="col-lg-3 col-6 text-center">
+            <span data-toggle="counter-up">{{ comments.count }}</span>
+            <p>Comments</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--==========================
+      Portfolio Section
+    ============================-->
+
+    <!--==========================
+      Clients Section
+    ============================-->
+    <section id="testimonials" class="section-bg">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>Testimonials</h3>
+        </header>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="owl-carousel testimonials-carousel wow fadeInUp">
+              <div class="testimonial-item">
+                <img src="{% static '' %}img/testimonial-1.jpg" class="testimonial-img" alt="">
+                <h3>Saul Goodman</h3>
+                <h4>Web Developer</h4>
+                <p>
+Who claims that his language is the best programming language, know that he is a user, not a programmer                </p>
+              </div>
+
+              <div class="testimonial-item">
+                <img src="{% static '' %}img/testimonial-2.jpg" class="testimonial-img" alt="">
+                <h3>Sara Wilsson</h3>
+                <h4>Designer</h4>
+                <p>
+The biggest mistake many programmers think is the ability to write a program without errors                </p>
+              </div>
+
+              <div class="testimonial-item">
+                <img src="{% static '' %}img/testimonial-3.jpg" class="testimonial-img" alt="">
+                <h3>Jena Karlis</h3>
+                <h4>Wed Developer</h4>
+                <p>
+If your code doesn't work properly, never praise it [no matter how you write it].                </p>
+              </div>
+
+              <div class="testimonial-item">
+                <img src="{% static '' %}img/testimonial-4.jpg" class="testimonial-img" alt="">
+                <h3>Matt Brandon</h3>
+                <h4>Freelancer</h4>
+                <p>
+Learning programming is very easy, but more complicated than you think                </p>
+              </div>
+
+              <div class="testimonial-item">
+                <img src="{% static '' %}img/testimonial-5.jpg" class="testimonial-img" alt="">
+                <h3>John Larson</h3>
+                <h4>Software Engineering</h4>
+                <p>
+Speed matters, but the capabilities of your software are more important                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- #testimonials -->
+
+
+    <!--==========================
+      Team Section
+    ============================-->
+    <section id="team">
+      <div class="container">
+        <div class="section-header">
+          <h3>About Me</h3>
+          <p>Personal information about the programmer of this website</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 wow fadeInUp mx-auto" data-wow-delay="0.3s">
+            <div class="member">
+              <img src="{% static '' %}img/me.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Amanda Jepson</h4>
+                  <span>Accountant</span>
+                  <div class="social">
+                    <a href="https://twitter.com/basel_midhat"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/basel.mmoh/"><i class="fa fa-facebook"></i></a>
+                    <a href="https://github.com/Basel-M-Mohaisen"><i class="fa fa-github"></i></a>
+                    <a href="https://www.instagram.com/basel_mohaisen/"><i class="fa fa-instagram"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- #team -->
+
+    <!--==========================
+      Contact Section
+    ============================-->
+
+  </main>
+
+  <!--==========================
+    Footer
+  ============================-->
+  {% include 'temp_part/footer.html' %}
+  <!-- #footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+  <!-- Uncomment below i you want to use a preloader -->
+  <!-- <div id="preloader"></div> -->
+
+</body>
+{% endblock %}
+

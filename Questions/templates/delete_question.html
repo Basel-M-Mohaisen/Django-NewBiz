@@ -1,0 +1,51 @@
+{% extends 'base_question.html' %}
+{% block question %}
+{% load crispy_forms_tags %}
+<div class="content-wrapper" style="min-height: 1416.81px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Delete Questions</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item success">Delete Questions</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title  ">Are you sure to delete this question ... " {{ object.title }} " ?</h3>
+            </div>
+              <br>
+              <div class="border-bottom p-4 mb-5">
+                        <form method="post">
+                        {% csrf_token %}
+<br><br><br>
+        <button type="submit" class="btn btn-danger col-lg-2 mx-auto ">Delete</button>
+        <a style="float: right" class="btn btn-secondary col-lg-2 mx-auto " href="{% url 'single_question' object.id %}">Retreat</a>
+                        </div>
+
+                    </form>
+          </div>
+
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

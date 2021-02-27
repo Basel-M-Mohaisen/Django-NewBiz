@@ -1,0 +1,86 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block index %}
+
+<body>
+{% include 'temp_part/navbar.html' %}
+<br><br><br><br><br>
+
+
+
+  <!-- Page Content -->
+  <div class="container ">
+
+    <div class="row">
+      <!-- Post Content Column -->
+      <div class="col-lg-11 mx-auto">
+        <!-- Title -->
+        <h1 class="mt-4 mx-auto">{{ show.title }}</h1>
+        <!-- Author -->
+        <p class="lead">
+          by
+          <a href="#">{{ show.by_user }}</a>
+        </p>
+        <hr>
+        <!-- Date/Time -->
+        <p>Posted on: {{ show.created_at }}</p>
+        <hr>
+        <!-- Preview Image -->
+        <img class="img-fluid mx-auto " src="{{ show.image.url }}" style="height: 650px;max-width: 1000px">
+        <!-- Post Content -->
+        <p class="lead">{{ show.content|safe }}</p>
+
+                                        <hr>
+
+        <!-- Comments Form -->
+            <h2 class="border-bottom mt-5 mb-8"> Comments ({{ comments.count }})</h2>
+
+
+        <!-- Single Comment -->
+      {% if comments %}
+          {% for comment in comments %}
+            <div class="media mb-4 mt-2">
+              <img class="d-flex mr-3 rounded-circle fa-user" src="http://placehold.it/50x50" alt="">
+              <div class="media-body">
+                <h5 class="mt-0 font-weight-bold">{{ comment.name }}</h5> {{ comment.content }}</div>
+            </div>
+                                          <hr>
+          {% endfor %}
+      {% else %}
+          <div class="text-center mb-3 p-4">
+             <h5 class="mb-0">No Comments .</h5>
+          </div>
+      {% endif %}
+
+        <!-- Comment with nested comments -->
+        <div class="card my-4 col-lg-12 mt-5">
+                <h5 class="card-header">Leave a Comment:</h5>
+                  <div class="card-body">
+                        <form method="post" action="{% url 'Show_art' show.id %}" >
+                                        {% csrf_token %}
+                      <div class="form-group">
+                      <div class="row">
+                        <div class="col">
+                           <input name="name" type="text" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="col">
+                            <input name="email" type="email" class="form-control" placeholder="Email">
+                        </div>
+                      </div>
+                            <textarea name="content" class="form-control mt-3" rows="3"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                  </div>
+        </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+{% include 'temp_part/footer.html' %}
+</body>
+
+{% endblock %}

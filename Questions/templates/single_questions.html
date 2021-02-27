@@ -1,0 +1,125 @@
+{% extends 'base_question.html' %}
+{% load static %}
+{% block question %}
+
+<div class="content-wrapper" style="min-height: 1514.56px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Show Question</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'Home' %}">Home</a></li>
+              <li class="breadcrumb-item active">Show Question</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">{{ single.title }}</h3>
+
+        </div>
+        <div class="card-body">
+               {{ single.content }}
+        </div>
+        <!-- /.card-body -->
+
+
+
+        <div class="card-footer">
+            {% if single.by_user == user %}
+
+      <div class="btn-group" role="group" aria-label="Basic example">
+       <a style="color: white ;background-color: forestgreen" class="btn btn-success mr-2 " href="{% url 'post_update' single.id%}" >Edit</a>
+       <a  class="btn btn-danger mr-2 " href="{% url 'post_delete' single.id%}" >Delete</a>
+      </div>
+
+{% endif %}
+            <span class="float-right">
+                          <a href="#" class="link-black text-sm">
+                            <i class="far fa-comments mr-1"></i> Comments ({{ comment.count }})
+                          </a>
+                        </span>
+        </div>
+
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+    <br><br>
+    <section class="content">
+
+<div class="post border-bottom ">
+{% if comment %}
+    {% for c in comment %}
+
+                      <div class="user-block p-2 ">
+                        <img class="img-circle img-bordered-sm" src="{% static '' %}dist/img/avatar5.png" alt="user image">
+                        <span class="username">
+                          <a href="#">{{ c.name }}</a>
+                        </span>
+                        <span class="description">{{ c.created_at}}</span>
+                      </div>
+
+                      <!-- /.user-block -->
+                      <p class="col-12">
+                        {{ c.content }}
+                      </p>
+        <hr>
+    {% endfor %}
+{% else %}
+    <div class="text-center mb-3 p-4 comment">
+    <h5 class="mb-0">No Comment <span style='font-size:20px;'>&#x1F615;</span>
+ </h5>
+
+    </div>
+
+{% endif %}
+ </div>
+
+ </section>
+
+
+
+        <div class="card my-4 col-lg-12 mt-5">
+                <h5 class="card-header">Leave a Comment:</h5>
+                  <div class="card-body">
+                        <form method="post" action="{% url 'single_question' single.id %}" >
+                                        {% csrf_token %}
+                      <div class="form-group">
+                      <div class="row">
+                        <div class="col">
+                           <input name="name" type="text" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="col">
+                            <input name="email" type="email" class="form-control" placeholder="Email">
+                        </div>
+                      </div>
+                            <textarea name="content" class="form-control mt-3" rows="3"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-block btn-primary col-lg-5 mx-auto">Comment</button>
+                    </form>
+                  </div>
+        </div>
+
+    </div>
+
+<br><br>
+<br>
+<br>
+<br>
+
+{% endblock %}

@@ -1,0 +1,120 @@
+ {% extends 'base_question.html' %}
+  {% load static %}
+ {% block question %}
+ <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>All Questions</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{% url 'Home' %}">Home</a></li>
+              <li class="breadcrumb-item active">All Questions</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Question Detail</h3>
+
+
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+              <div class="row">
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Questions</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ questions.count }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Comments</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ comment.count }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-4">
+                  <div class="info-box bg-light">
+                    <div class="info-box-content">
+                      <span class="info-box-text text-center text-muted">Number Of User</span>
+                      <span class="info-box-number text-center text-muted mb-0">{{ user.count }}<span>
+                      </span></span></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                {% if questions %}
+
+                    {% for q in questions %}
+                    <div class="post">
+                      <div class="user-block">
+                        <img class="img-circle img-bordered-sm" src="{{ q.by_user.profile.image.url }}" alt="user image">
+                        <span class="username">
+                          <a href="#">{{ q.by_user }}</a>
+                        </span>
+                        <span class="description">{{ q.created_at }}</span>
+                      </div>
+                      <!-- /.user-block -->
+                        <h6 class="text-bold">{{ q.title }}</h6>
+                      <p>
+                      {{ q.content|slice:":400" }}
+                      </p>
+
+                      <p>
+                        <a class="btn btn-outline-secondary" href="{% url 'single_question' q.id %}" role="button">Show Questions</a>
+                      </p>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                         <div class="text-center mb-3 p-4 col-lg-11">
+<br><br>
+
+                          <h5 class="mb-0">There is no question yet.</h5></div>
+
+                {% endif %}
+
+
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+              <h3 class="text-primary">NewBiz</h3>
+              <p class="text-muted">Add any problem you encounter here, and the site’s followers will respond to you and find a solution to your problem.</p>
+
+              <div class="text-center mt-5 mb-3 mx-auto">
+                <a href="{% url 'add_question' %}" class="btn btn-sm btn-warning">Add Questions</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+
+ {% endblock %}
+
+
+
+

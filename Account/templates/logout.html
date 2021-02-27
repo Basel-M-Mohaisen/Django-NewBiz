@@ -1,0 +1,20 @@
+{% extends 'account_base.html' %}
+{% block account %}
+{% load crispy_forms_tags %}
+
+<div class="register-box">
+  <div class="register-logo">
+    <a href=""><b>Admin</b>LTE</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">You are successfully logged out</p>
+
+
+      <a href="{% url 'login' %}" class="text-center mx-auto">Log in again</a>
+    </div>
+    <!-- /.form-box -->
+  </div><!-- /.card -->
+</div>
+{% endblock %}
