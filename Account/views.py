@@ -42,7 +42,7 @@ def register(request):  #طريقة 2
              new_user.save()
              messages.success(
                   request,f'تهانينا{new_user} لقد تمت عملية تسجيل دخولك بنجاح ')
-             return redirect('profile')
+             return redirect('login')
      else:
        form=UserCreationForm()
      return render(request,'register.html',{'form':form})
@@ -92,7 +92,7 @@ def profile(request):
            'art':art,
            'comment':comment,
            'question':question,
-        'user':user,
+           'user':user,
 
     })
 

@@ -10,8 +10,9 @@ class Learn(models.Model):
     content=RichTextField()
     purport=RichTextField()
     image=models.FileField()
+    image2=models.FileField()
     created_at = models.DateTimeField(auto_now=True)
-    by_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    by_user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -26,7 +27,7 @@ class Article(models.Model):
     title=models.CharField(max_length=300)
     content=models.TextField()
     created_at = models.DateTimeField(auto_now=True)
-    by_user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    by_user = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.SlugField(null=True, blank=True)
 
     def save(self, *args, **kwargs):

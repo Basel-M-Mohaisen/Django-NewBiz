@@ -11,14 +11,13 @@ admin.site.register(Learn,lernn)
 
 class Articlee(admin.ModelAdmin):
     list_display = ['title','content','created_at','by_user']
-    readonly_fields =['by_user']
 
 admin.site.register(Article,Articlee)
 
 
 class Single_Artt(admin.ModelAdmin):
     list_display = ['title','article','created_at','by_user','active']
-    readonly_fields =['by_user']
+
 
 admin.site.register(Single_Art,Single_Artt)
 

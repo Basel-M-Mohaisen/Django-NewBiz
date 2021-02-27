@@ -17,7 +17,7 @@
           <img src="{{ user.profile.image.url }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ user.first_name }} {{ user.last_name }}</a>
+          <a href="{% url 'profile' %}" class="d-block">{{ user.first_name }} {{ user.last_name }}</a>
         </div>
       </div>
 

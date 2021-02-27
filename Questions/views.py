@@ -69,6 +69,7 @@ class QuestionDeleteView(UserPassesTestMixin,LoginRequiredMixin,DeleteView):
     def test_func(self):
         post = self.get_object()
         if self.request.user == post.by_user:
+
             return True
         else:
             return False
